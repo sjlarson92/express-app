@@ -75,7 +75,7 @@ web_modules/
 .yarn-integrity
 
 # dotenv environment variable files
-.env
+#.env purposely removing for learning purposes so I can see the env in my repo
 .env.development.local
 .env.test.local
 .env.production.local
@@ -104,7 +104,6 @@ dist
 
 # vuepress v2.x temp and cache directory
 .temp
-.cache
 
 # vitepress build output
 **/.vitepress/dist
