@@ -24,5 +24,9 @@
    ```
    
    - Modify tsconfig.json to look like [tsconfig.json](tsconfig.json)
-   - Run app `npx ts-node src/index.ts` 
+   - Run app `npx ts-node src/index.ts # Need to use npx as node cannot run a .ts file` 
       
+4. Watch file changes
+   ```bash
+   npm i -D nodemon ts-node concurrently # Nodemon is a utility library that automatically restarts a Node-based application upon detecting file changes
+   ```
