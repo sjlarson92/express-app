@@ -28,5 +28,17 @@
       
 4. Watch file changes
    ```bash
-   npm i -D nodemon ts-node concurrently # Nodemon is a utility library that automatically restarts a Node-based application upon detecting file changes
+   # Nodemon is a utility library that automatically restarts 
+   # a Node-based application upon detecting file changes
+   npm i -D nodemon ts-node concurrently 
+   ```
+   
+5. Update Scripts
+   ```bash
+   # Update scripts in package json 
+   "scripts": {
+    "build": "npx tsc",
+    "start": "node dist/index.js",
+    "dev": "nodemon src/index.ts"
+   }
    ```
