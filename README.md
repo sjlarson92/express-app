@@ -42,3 +42,59 @@
     "dev": "nodemon src/index.ts"
    }
    ```
+   
+### Local PostgreSQL & Prisma
+
+   ```bash
+   # add prisma dependency
+   npm i prisma -D
+   
+   # create prisma schema
+   npx prisma init
+   ```
+
+- When setting locally it's important to ensure the user has
+  the correct permission otherwise migrations will not run
+  properly
+
+```bash
+# Create the user with appropriate privileges:
+CREATE USER your_user WITH PASSWORD 'your_password';
+
+# Grant the necessary roles:
+ALTER USER your_user WITH CREATEDB;
+
+# Create the database with the user as the owner:
+CREATE DATABASE your_database_name OWNER your_user;
+
+# Connect to the database and set up schema permissions:
+\c your_database_name
+GRANT ALL PRIVILEGES ON SCHEMA public TO your_user;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO your_user;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON SEQUENCES TO your_user;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON FUNCTIONS TO your_user;
+
+# Add Database connection string to .env file that Prisma generated
+DATABASE_URL="postgresql://USER:PASSWORD@HOST:PORT/DATABASE"
+
+# Add Data source to schema.prisma file
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+```
+- Create models in schema.primsa file
+```bash
+# Create a new SQL migration file for this migration
+# Runs the SQL migration file against the database
+npx prisma migrate dev --name init
+ 
+npx prisma generate # Run after any changes to models to generate migrations with changes
+npx prisma migrate dev --name model_change # run migration
+npx prisma migrate deploy # Run existing migrations
+```
