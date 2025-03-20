@@ -15,23 +15,42 @@
    3. Create index.ts file in src
       - Follow steps [here](https://blog.logrocket.com/how-to-set-up-node-typescript-express/) 
       - Make it look like [index.ts](src/index.ts)
+```ts
+// src/index.ts
+import express, { Express, Request, Response } from "express";
+import dotenv from "dotenv";
+
+dotenv.config();
+
+const app: Express = express();
+const port = process.env.PORT || 3000;
+
+app.get("/", (req: Request, res: Response) => {
+res.send("Express + TypeScript Server");
+});
+
+app.listen(port, () => {
+console.log(`[server]: Server is running at http://localhost:${port}`);
+});
+```
       
 3. Add TypeScript
-   ```bash
+```bash
    npm i -D typescript @types/express @types/node # Install typescript and types for express and node
    
    npx tsc --init # Generate tsconfig.json file
-   ```
-   
+```
    - Modify tsconfig.json to look like [tsconfig.json](tsconfig.json)
-   - Run app `npx ts-node src/index.ts # Need to use npx as node cannot run a .ts file` 
-      
+   - Run app 
+```bash
+npx ts-node src/index.ts # Need to use npx as node cannot run a .ts file` 
+```      
 4. Watch file changes
-   ```bash
+```bash
    # Nodemon is a utility library that automatically restarts 
    # a Node-based application upon detecting file changes
    npm i -D nodemon ts-node concurrently 
-   ```
+```
    
 5. Update Scripts
    ```bash
